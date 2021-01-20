@@ -7,7 +7,8 @@ md.setOption('ghCodeBlocks', 'true');
 md.setOption('requireSpaceBeforeHeadingText', 'true');
 
 function md2html(markdown) {
-    let clean = HtmlSanitizer.SanitizeHtml(md.makeHtml(markdown));
+    let Potential_threat = md.makeHtml(markdown)
+    let clean = HtmlSanitizer.SanitizeHtml(DOMPurify.sanitize(Potential_threat));
     let p = new DOMParser();
     let comment_body = p.parseFromString(clean, "text/html")
     comment_body.querySelectorAll("a").forEach((el) => {
