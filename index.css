@@ -2,3 +2,12 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+.nav-item {
+    display: inline-flex;
+}
+
+.clear-text {
+    text-decoration: none;
+    color: black;
+}
