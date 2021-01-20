@@ -11,6 +11,10 @@ function md2html(markdown) {
     let p = new DOMParser();
     let cmt = p.parseFromString(clean, "text/html")
     cmt.querySelectorAll("a").forEach((el) => {
+        if (!(["http:", "https:", "ftp:", "mailto:"].includes(el.protocol))) {
+            console.log(el.protocol, "blocked");
+            el.href = "about:blank#blocked";
+        }
         el.rel = "nofollow";
     })
     return new XMLSerializer().serializeToString(cmt)
@@ -23,7 +27,7 @@ const comment_root = {
         }
     },
     mounted() {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.comments.push(
                 {
                     user: "lemon-mint",
@@ -31,7 +35,7 @@ const comment_root = {
                     body: md2html("# overflow: hidden;\n[example link](https://example.com)\n")
                 }
             )
-        },1000);
+        }, 1000);
     },
     delimiters: ['[[%', '%]]']
 };

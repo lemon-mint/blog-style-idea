@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/jitbit/HtmlSanitizer@master/HtmlSanitizer.min.js" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-hashes' 'unsafe-eval'; script-src 'self' 'unsafe-eval'; script-src-elem 'self'; script-src-attr 'self'; style-src 'self'; style-src-elem 'self'; style-src-attr 'self'; img-src 'self' data: https://cdn.jsdelivr.net; font-src *;">
     <link rel="stylesheet" href="index.css">
     <title>{{ .Title }}</title>
     <meta property="og:title" content="{{ .Title }}" />
@@ -16,7 +17,7 @@
 
 <body>
     <!-- body -->
-    <div style="padding: 10px;" id="vue-comment-root">
+    <div class="pad-10" id="vue-comment-root">
         <div class="TimelineItem" v-for="comment in comments">
             <div class="TimelineItem-badge">
                 <img src="https://cdn.jsdelivr.net/gh/primer/octicons@v11.2.0/icons/comment-discussion-24.svg">
@@ -31,7 +32,7 @@
                         </div>
                     </div>
                     <div class="Box-body">
-                        <div style="overflow: hidden;">
+                        <div class="anti-overflow">
                             <div v-html="comment.body"></div>
                         </div>
                     </div>

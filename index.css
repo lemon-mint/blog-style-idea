@@ -11,3 +11,11 @@ img {
     text-decoration: none;
     color: black;
 }
+
+.pad-10 {
+    padding: 10px;
+}
+
+.anti-overflow {
+    overflow: hidden;
+}
