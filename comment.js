@@ -28,15 +28,15 @@ const comment_root = {
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.comments.push(
-                {
-                    user: "lemon-mint",
-                    time: new Date().toISOString(),
-                    body: md2html("# overflow: hidden;\n[example link](https://example.com)\n")
-                }
-            )
-        }, 1000);
+
+        this.comments.push(
+            {
+                user: "lemon-mint",
+                time: new Date().toISOString(),
+                body: md2html("# overflow: hidden;\n[example link](https://example.com)\n")
+            }
+        )
+
     },
     delimiters: ['[[%', '%]]']
 };
