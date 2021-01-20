@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- header -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@primer/css@15.2.0/dist/primer.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jitbit/HtmlSanitizer@master/HtmlSanitizer.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css">
+    <title>{{ .Title }}</title>
+    <meta property="og:title" content="{{ .Title }}" />
+</head>
+
+<body>
+    <!-- body -->
+    <div style="padding: 10px;" id="vue-comment-root">
+        <div class="TimelineItem" v-for="comment in comments">
+            <div class="TimelineItem-badge">
+                <img src="https://cdn.jsdelivr.net/gh/primer/octicons@v11.2.0/icons/comment-discussion-24.svg">
+            </div>
+            <div class="TimelineItem-body">
+                <div class="Box">
+                    <div class="Box-header">
+                        <div class="Box-title">
+                            <a class="text-bold link-gray-dark mr-1">[[% comment.user %]]</a>
+                            -
+                            <a class="link-gray">[[% comment.time %]]</a>
+                        </div>
+                    </div>
+                    <div class="Box-body">
+                        <div style="overflow: hidden;">
+                            <div v-html="comment.body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <script src="comment.js"></script>
+</body>
+
+</html>
