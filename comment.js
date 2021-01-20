@@ -9,15 +9,15 @@ md.setOption('requireSpaceBeforeHeadingText', 'true');
 function md2html(markdown) {
     let clean = HtmlSanitizer.SanitizeHtml(md.makeHtml(markdown));
     let p = new DOMParser();
-    let cmt = p.parseFromString(clean, "text/html")
-    cmt.querySelectorAll("a").forEach((el) => {
+    let comment_body = p.parseFromString(clean, "text/html")
+    comment_body.querySelectorAll("a").forEach((el) => {
         if (!(["http:", "https:", "ftp:", "mailto:"].includes(el.protocol))) {
             console.log(el.protocol, "blocked");
             el.href = "about:blank#blocked";
         }
         el.rel = "nofollow";
     })
-    return new XMLSerializer().serializeToString(cmt)
+    return new XMLSerializer().serializeToString(comment_body)
 }
 
 const comment_root = {
