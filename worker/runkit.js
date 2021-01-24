@@ -26,7 +26,7 @@ app.post('/create', async function (request, response) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             "X-Client": "axios",
-            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 20_0_0 like Mac OS X) AppleWebKit/604.1.28 (KHTML, like Gecko) Version/20.0.0 Mobile/14A403 Mobile/604.1.28"
+            "User-Agent": "Axios/1.0"
         }
     })
     console.log(resp.data)
