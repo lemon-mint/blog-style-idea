@@ -1,10 +1,15 @@
 const express = require('express');
-let faunadb = require('faunadb')
-const { Octokit } = require("@octokit/core")
-const { axios } = require("axios"); var bodyParser = require('body-parser');
-const app = express()
+const faunadb = require('faunadb');
+const { Octokit } = require("@octokit/core");
+const cors = require('cors');
+const { axios } = require("axios");
+const bodyParser = require('body-parser');
+
+const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 const octokit = new Octokit({});
 
