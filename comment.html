@@ -47,12 +47,19 @@
         <hr>
         <div class="TimelineItem">
             <form action="some-server-url" method="post" id="comment-form">
-                <textarea name="comment" rows="10"></textarea>
-                <div id="captchabox"></div>
+                <div class="form-group">
+                    <div class="form-group-header">
+                        <label for="comment-textarea">Comment</label>
+                    </div>
+                    <div class="form-group-body">
+                        <textarea class="form-control" id="comment-textarea" name="comment"></textarea>
+                    </div>
+                    <div id="captchabox"></div>
+                </div>
             </form>
         </div>
     </div>
     <script src="comment.js"></script>
-    </body>
-    
+</body>
+
 </html>
