@@ -57,7 +57,6 @@ app.post('/create', async function (req, res) {
         res.redirect(oauth_redirect);
         return
     }
-    res.send("error");
 })
 
 app.get("/signintest", async function (req, res) {
@@ -105,5 +104,9 @@ app.get("/gh/callback", async function (req, res) {
     res.send(oauth2_resp.data)
 })
 
+app.get('/session/test', async function (req, res) {
+    let sess = req.session;
+    res.send(sess.username && sess.avatar_url);
+});
 
 app.listen(3000, function () { })
