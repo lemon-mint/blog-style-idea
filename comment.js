@@ -41,3 +41,5 @@ const comment_root = {
     delimiters: ['[[%', '%]]']
 };
 Vue.createApp(comment_root).mount('#vue-comment-root');
+
+document.getElementById("url").value = window.location.host + window.location.pathname;

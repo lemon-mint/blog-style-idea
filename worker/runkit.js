@@ -17,8 +17,8 @@ let q = faunadb.query
 var client = new faunadb.Client({ secret: process.env.FUNNA_API_KEY })
 
 app.post('/create', async function (request, response) {
-    console.log(request.body)
-    console.log(request.body["h-captcha-response"])
+    //console.log(request.body)
+    //console.log(request.body["h-captcha-response"])
     const params = new URLSearchParams()
     params.append('response', request.body["h-captcha-response"])
     params.append('secret', process.env.HCAPTCHA_SECRET_KEY)
@@ -29,6 +29,14 @@ app.post('/create', async function (request, response) {
             "User-Agent": "Axios/1.0"
         }
     })
+    client.query(
+        q.Create(q.Collection('test'), {
+            data: {
+                url: request.body["url"],
+                comment: request.body["comment"]
+            }
+        })
+    )
     console.log(resp.data)
     response.send(request.body)
 })
