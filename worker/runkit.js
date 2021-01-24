@@ -106,7 +106,11 @@ app.get("/gh/callback", async function (req, res) {
 
 app.get('/session/test', async function (req, res) {
     let sess = req.session;
-    res.send(sess.username && sess.avatar_url);
+    if (sess.username && sess.avatar_url) {
+        res.send("true");
+        return
+    }
+    res.send("false");
 });
 
 app.listen(3000, function () { })
