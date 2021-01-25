@@ -47,7 +47,7 @@ document.getElementById("callback").value = window.location.href;
 
 let xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
-xhr.open("https://runkit.io/lemon-mint/600cbce6a4c0d8001a400c88/branches/master/session/test");
+xhr.open("GET", "https://runkit.io/lemon-mint/600cbce6a4c0d8001a400c88/branches/master/session/test");
 xhr.onreadystatechange = () => {
     if (xhr.status == 200 && xhr.readyState == 4) {
         if (xhr.responseText == "true") {
