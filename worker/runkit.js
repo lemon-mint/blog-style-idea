@@ -110,6 +110,7 @@ app.get('/session/test', async function (req, res) {
         res.send("true");
         return
     }
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     res.send("false");
 });
 

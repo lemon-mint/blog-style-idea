@@ -46,7 +46,7 @@ document.getElementById("url").value = window.location.host + window.location.pa
 document.getElementById("callback").value = window.location.href;
 
 let xhr = new XMLHttpRequest();
-//xhr.withCredentials = true;
+xhr.withCredentials = true;
 xhr.open("GET", "https://untitled-dkrvk2jo785q.runkit.sh/session/test");
 xhr.onreadystatechange = () => {
     if (xhr.status == 200 && xhr.readyState == 4) {
