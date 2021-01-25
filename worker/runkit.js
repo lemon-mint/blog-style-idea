@@ -1,6 +1,5 @@
 const express = require('express');
 const faunadb = require('faunadb');
-const cors = require('cors');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -9,7 +8,6 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -23,6 +21,7 @@ const oauth_redirect = "https://github.com/login/oauth/authorize?client_id=41a32
 
 app.post('/create', async function (req, res) {
     let sess = req.session;
+    res.setHeader("Access-Control-Allow-Origin", "*");
     if (sess.username && sess.avatar_url) {
         const params = new URLSearchParams()
         params.append('response', req.body["h-captcha-response"])
@@ -110,6 +109,7 @@ app.get('/session/test', async function (req, res) {
         res.send("true");
         return
     }
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.send("false");
 });
