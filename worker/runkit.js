@@ -3,15 +3,31 @@ const faunadb = require('faunadb');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+let RedisStore = require('connect-redis')(session)
+//const FileStore = require('session-file-store')(session);
+
+const redis = require('redis');
+const Redisc = redis.createClient({
+    host: process.env.REDIS_ENDPOINT,
+    port: parseInt(process.env.REDIS_PORT),
+    password: process.env.REDIS_PASSWORD
+});
 
 const app = express();
+app.set('trust proxy', 1);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
+    proxy: true,
     secret: process.env.SECRET_KEY,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new RedisStore({ client: Redisc }),
+    cookie: {
+        sameSite: 'none',
+        secure: 'true',
+    }
 }));
 
 let q = faunadb.query
@@ -20,8 +36,8 @@ var client = new faunadb.Client({ secret: process.env.FUNNA_API_KEY })
 const oauth_redirect = "https://github.com/login/oauth/authorize?client_id=41a3215c5b2c3b92a8f3";
 
 app.post('/create', async function (req, res) {
-    let sess = req.session;
     res.setHeader("Access-Control-Allow-Origin", "*");
+    let sess = req.session;
     if (sess.username && sess.avatar_url) {
         const params = new URLSearchParams()
         params.append('response', req.body["h-captcha-response"])
@@ -59,11 +75,13 @@ app.post('/create', async function (req, res) {
 })
 
 app.get("/signintest", async function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     let sess = req.session;
     res.send(sess)
 })
 
 app.get("/gh/callback", async function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     let sess = req.session;
     const params = new URLSearchParams()
     params.append('client_id', "41a3215c5b2c3b92a8f3")
@@ -104,13 +122,14 @@ app.get("/gh/callback", async function (req, res) {
 })
 
 app.get('/session/test', async function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     let sess = req.session;
     if (sess.username && sess.avatar_url) {
         res.send("true");
         return
     }
-    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
-    res.setHeader("Access-Control-Allow-Credentials", "true");
+    sess.testcount += 1;
     res.send("false");
 });
 
