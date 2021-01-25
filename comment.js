@@ -44,3 +44,18 @@ Vue.createApp(comment_root).mount('#vue-comment-root');
 
 document.getElementById("url").value = window.location.host + window.location.pathname;
 document.getElementById("callback").value = window.location.href;
+
+let xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+xhr.open("https://runkit.io/lemon-mint/600cbce6a4c0d8001a400c88/branches/master/session/test");
+xhr.onreadystatechange = () => {
+    if (xhr.status == 200 && xhr.readyState == 4) {
+        if (xhr.responseText == "true") {
+            document.getElementById("comment-textarea").disabled = false;
+            document.getElementById("form-msg").innerHTML = "";
+            document.getElementById("captchabox").hidden = false;
+            document.getElementById("signin-btn").hidden = true;
+        }
+    }
+}
+xhr.send();
