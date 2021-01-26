@@ -8,3 +8,7 @@ var onloadCallback = function () {
         'callback': submitForm
     });
 };
+
+function getURL() {
+    return window.parent.location.host + window.parent.location.pathname
+}

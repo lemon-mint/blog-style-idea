@@ -42,7 +42,7 @@ const comment_root = {
 };
 Vue.createApp(comment_root).mount('#vue-comment-root');
 
-document.getElementById("url").value = window.location.host + window.location.pathname;
+document.getElementById("url").value = getURL();
 document.getElementById("callback").value = window.location.href;
 
 let xhr = new XMLHttpRequest();
