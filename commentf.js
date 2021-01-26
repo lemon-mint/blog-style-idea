@@ -10,5 +10,9 @@ var onloadCallback = function () {
 };
 
 function getURL() {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get("url")) {
+        return q.get("url")
+    }
     return window.parent.location.host + window.parent.location.pathname
 }
