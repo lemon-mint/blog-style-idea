@@ -50,7 +50,7 @@ app.post('/create', async function (req, res) {
             }
         })
         if (captcha_resp.data.success) {
-            console.log("captcha Success")
+            //console.log("captcha Success")
             await client.query(
                 q.Create(q.Collection('comment'), {
                     data: {
@@ -87,7 +87,7 @@ app.get("/gh/callback", async function (req, res) {
     params.append('client_id', "41a3215c5b2c3b92a8f3")
     params.append('client_secret', process.env.OAUTH2_SECRET)
     params.append('code', req.query.code)
-    console.log(req.query.code)
+    //console.log(req.query.code)
     const oauth2_resp = await axios.post("https://github.com/login/oauth/access_token", params, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -96,7 +96,7 @@ app.get("/gh/callback", async function (req, res) {
             "Accept": "application/json"
         }
     })
-    console.log(oauth2_resp)
+    //console.log(oauth2_resp)
     if (oauth2_resp.data.access_token) {
         const user_resp = await axios.get("https://api.github.com/user", {
             headers: {
